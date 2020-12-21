@@ -1,0 +1,81 @@
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib.pyplot as plt
+
+#버전 확인
+tf.__version__
+keras.__version__
+
+fashion_mnist = keras.datasets.fashion_mnist
+
+#데이터셋 다운로드 후 적재
+(X_train_full, y_train_full),(X_test, y_test) = fashion_mnist.load_data()
+
+#데이터 크기
+X_train_full.shape
+
+#데이터 타입
+X_train_full.dtype
+
+#입력 특성의 스케일 조정 => 경사하강법으로 신경망을 훈련하기 때문
+#필셀 강도를 255.0으로 나누어 0~1 사이의 범위로 조정 
+X_valid, X_train = X_train_full[:5000] /255.0, X_train_full[5000:]/255.0
+y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
+X_test = X_test/255.0
+
+class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","shirt","Sneaker","Bag","Ankle boot"]
+
+class_names[y_train[5]]
+
+plt.figure() 
+plt.imshow(X_train[0])
+plt.colorbar()
+plt.grid(False) 
+plt.show()
+
+#시퀀셜 API를 사용하여 모델 만들기
+#Sequential는 순서대로 연결된 층을 일렬로 쌓아서 구성
+#model = keras.models.Sequential()
+
+#Flatten은 입ㄹ력이미즈를 1D배열로 변환
+#model.add(keras.layers.Flatten(input_shape=[28,28]))
+
+#Dense는 은닉층을 추가
+#model.add(keras.layers.Dense(300,activation = "relu"))
+#model.add(keras.layers.Dense(100,activation = "relu"))
+#클래스마다 하나씩 총 10개의 뉴런을 가진 출력층이 생김
+# 다중분류이므로 softmax 사용
+#model.add(keras.layers.Dense(10,activation = "softmax"))
+
+#Sequential 모델을 만들 때 층의 리스트를 전달
+model = keras.models.Sequential([
+    keras.layers.Flatten(input_shape=[28,28]),   
+    keras.layers.Dense(300,activation = "relu"),
+    keras.layers.Dense(100,activation = "relu"),
+    keras.layers.Dense(10,activation = "softmax")
+])
+
+#모델의 모든 층을 출력
+#dense_1의 파라미터가 784*300+300 = 235,500개임
+#훈련데이터가 많지 않을 경우 과대적합의 위험이 있음
+#또한 훈련데이터를 학습하기 충분한 유연성을 가짐 
+model.summary()
+
+#모델에 있는 층을 리스트로 출력
+model.layers
+
+
+#인덱스나 이름으로 층 선택이  가능 
+hidden1 = model.layers[1]
+hidden1.name
+
+model.get_layer('dense_1') is hidden1
+
+#get_weights와 set_weights메서드를 사용해 층의 모든 파라미터 접근 가능
+weights, biases = hidden1.get_weights()
+
+weights
+weights.shape
+
+biases
+biases.shape
