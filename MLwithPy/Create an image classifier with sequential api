@@ -1,6 +1,9 @@
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 #버전 확인
 tf.__version__
@@ -79,3 +82,64 @@ weights.shape
 
 biases
 biases.shape
+
+#모델 컴파일
+#클래스가 배타적이므로 "sparse_categorical_crossentropy" 사용
+#만약, 클래스별 타깃이 확률이라면(원핫 벡터) "categorical_crossentropy" 사용 
+#이진분류의 경우 sigmoid 함수 사용, "binary_crossentropy" 손실 사용
+#옵티마이저의 "sgd"를 지정 => stochastic gradient descent (확률적 경사 하강법)
+#accuracy 정확도 측정
+model.compile(loss = "sparse_categorical_crossentropy",
+             optimizer = "sgd",
+             metrics = ["accuracy"])
+
+#모델 훈련 및 평가
+#모델 훈련을 위해서 fit 메소드 호출 
+#훈련 손실(loss 값)이 감소하는지 확인
+#훈련 정확도가 검증 정확도보다 월등히 크면 과대적합 의심 => 차이 확인
+history = model.fit(X_train, y_train, epochs =30,
+                   validation_data = (X_valid, y_valid))
+
+
+#훈련세트가 너무 편중되어 있는 경우 
+#fit() 메소드를 호출할 때 class_weight 매개변수를 지정 
+#=> 적게 증장하는 클래스는 높은 가중치 / 많이 등장하는 클래스는 낮은 가중치를 부여
+#이 가중치는 손실을 계산할 때 사용
+
+#샘플별로 가중치를 부여하고 싶다면 sample_weight 매개변수를 지정
+#=> 전문가에 의해 할당된 레이블과 크라우드소싱 플랫폼을 사용해 할당된 레이블이 있을 경우 전자에 더 높은 가중치 부여
+
+#위의 두 class_weight와 sample_weight가 둘다 사용 되었다면 두 값을 곱하여 사용
+
+#history.history => 에포크가 끝날 때 마다 훈련 세트와 검증세트에 대한 손실과 측정한 지표를 담은 딕셔너리
+#훈련하는 동안 훈련과 검증의 정확도는 계속 상승
+#훈련과 검증의 손실(loss)는 감소 
+#검증곡선이 훈련곡선과 가깝다면 과대적합이 되지 않았다는 증거 
+
+pd.DataFrame(history.history).plot(figsize=(8,5))
+plt.grid(True)
+plt.gca().set_ylim(0,1)
+plt.show()
+
+#그래프 초기 부분에서 훈련보다 검증에서 더 좋은 성능을 낸것처럼 보임
+#하지만 검증의 손실은 에포크가 끝난 후에 계산되고, 훈련손실은 에포르가 진행되는 동안 계산 됨
+#따라서 그래프를 볼 때 왼쪽으로 에포크의 절반만큼 이동해서 보면 됨
+
+#evaluate() 메소드 : 테스트 세트로 모델을 평가하여 일반화 오차를 추정
+model.evaluate(X_test, y_test)
+
+#모델을 사용해 예측 만들기
+#predict 메소드 : 새로운 샘플에 대해 예측 생성
+X_new = X_test[:3]
+y_proba = model.predict(X_new)
+#각 sample에 대해 0~9까지 클래스 마다 각각의 확률을 모델이 추정
+y_proba.round(2)
+
+#predict_classes() 메소드 : 가장 높은 확률을 가진 클래스 추출
+y_pred = model.predict_classes(X_new)
+y_pred
+
+np.array(class_names)[y_pred]
+
+y_new = y_test[:3]
+y_new
