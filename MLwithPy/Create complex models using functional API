@@ -81,3 +81,8 @@ y_pred_main, y_pred_aux = model.predict([X_new_A, X_new_B])
 y_pred_main
 y_pred_aux
 
+#모델 저장과 복원
+#모델 서브클래싱에서는 사용할 수 없음
+
+model.save("my_keras_model.h5")
+model = keras.models.load_model("my_keras_model.h5")
