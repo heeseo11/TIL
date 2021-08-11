@@ -20,7 +20,11 @@
   **html 기본 구조를 자동으로 생성하기 위해서 ! +  tab 또는 enter 클릭**
   
 - 시맨틱 태그
-  
+
+  - [참고 코드](https://github.com/heeseo11/TIL/blob/master/HTML/structure.html)
+
+<img src = "https://user-images.githubusercontent.com/61724682/129027547-90b5536e-5e9a-407a-8d37-9142ba86620c.png" width="70%" height="70%">
+ 
   - 헤더 영역을 나타내는 ```<header>``` 태그
   
   - 내비게이션 영역을 나타내는 ```<nav>``` 태그
