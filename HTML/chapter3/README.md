@@ -21,7 +21,7 @@
   
 - 시맨틱 태그
 
-  - [참고 코드](https://github.com/heeseo11/TIL/blob/master/HTML/structure.html)
+  - [참고 코드](https://github.com/heeseo11/TIL/blob/master/HTML/chapter3/README.md)
 
 <img src = "https://user-images.githubusercontent.com/61724682/129027547-90b5536e-5e9a-407a-8d37-9142ba86620c.png" width="70%" height="70%">
  
