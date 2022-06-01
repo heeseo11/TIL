@@ -4,3 +4,14 @@
 #### chapter2 : 파이썬과 넘파이 복습
 
 #### chapter3 : 머신러닝의 기초
+
+#### chapter4 : 파이썬과 넘파이 복습
+
+#### chapter5 : 머신러닝의 기초
+
+#### chapter6 : 다층 퍼셉트론
+
+#### chapter7 : MLP와 케라스 라이브러리
+
+#### chapter8 : 심층신경망
+
