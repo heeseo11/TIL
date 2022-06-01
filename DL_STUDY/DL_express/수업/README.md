@@ -5,9 +5,9 @@
 
 #### chapter3 : 머신러닝의 기초
 
-#### chapter4 : 파이썬과 넘파이 복습
+#### chapter4 : 선형회귀
 
-#### chapter5 : 머신러닝의 기초
+#### chapter5 : 퍼셉트론
 
 #### chapter6 : 다층 퍼셉트론
 
