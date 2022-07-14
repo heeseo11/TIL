@@ -15,3 +15,12 @@
 
 #### chapter8 : 심층신경망
 
+#### chapter9 : 컨벌루션 신경망
+
+#### chapter10 : 영상인식
+
+#### chapter11 : 순환신경망
+
+#### chapter12 : 자연어 처리
+
+#### chapter13 : 
