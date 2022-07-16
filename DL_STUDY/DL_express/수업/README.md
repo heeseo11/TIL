@@ -23,4 +23,7 @@
 
 #### chapter12 : 자연어 처리
 
-#### chapter13 : 
+#### chapter13 : 강화학습
+
+#### chapter14 : 생성모델
+
