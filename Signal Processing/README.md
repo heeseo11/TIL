@@ -9,5 +9,7 @@
 3. duration : 음성 길이
 
 
+![image](https://user-images.githubusercontent.com/61724682/183258829-b2c85905-3dd9-4160-8b5d-53bce55b9aae.png)
 
+1. 스펙트로그램 형태로 변환 
 
